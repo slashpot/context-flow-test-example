@@ -4,7 +4,7 @@ import {CounterContext} from "../../context/CounterContext";
 export default Component => props => {
     const {counterState, counterDispatch} = useContext(CounterContext);
 
-    const increment = () => {
+    const increment =  () => {
         counterDispatch({type:"increment"});
     }
 
