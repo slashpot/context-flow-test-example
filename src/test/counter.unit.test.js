@@ -29,14 +29,11 @@ describe("counter tests", () => {
         mockContext();
 
         const Container = require("../component/Counter/CounterContainer").default;
-        const MockComponent = Container((props) => {
-            return <div>
-                {props.count}
-            </div>;
-        });
+        const MockComponent = Container(() => <></>);
 
         let testRenderer = TestRenderer.create(<MockComponent/>);
         testRenderer.toTree().rendered.props.increment();
+
         expect(mockState.count).toBe(1);
     });
 });
