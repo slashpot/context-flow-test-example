@@ -1,4 +1,4 @@
-import {counterReducer} from "../reducer/counterReducer";
+import {counterReducer} from "../../reducer/counterReducer";
 import TestRenderer from "react-test-renderer";
 import React from "react";
 
@@ -6,7 +6,7 @@ let mockReducer;
 let mockState;
 
 function mockContext(count) {
-    jest.doMock("../context/CounterContext", () => {
+    jest.doMock("../../context/CounterContext", () => {
         mockReducer = (action) => {
             mockState = counterReducer(mockState, action);
         };
@@ -29,7 +29,7 @@ describe("counter tests", () => {
         let currentCount = 0
         mockContext(currentCount);
 
-        const Container = require("../component/Counter/CounterContainer").default;
+        const Container = require("../../component/Counter/CounterContainer").default;
         const MockComponent = Container(() => <></>);
 
         let testRenderer = TestRenderer.create(<MockComponent/>);
@@ -42,7 +42,7 @@ describe("counter tests", () => {
         let currentCount = 1
         mockContext(currentCount);
 
-        const Container = require("../component/Counter/CounterContainer").default;
+        const Container = require("../../component/Counter/CounterContainer").default;
         const MockComponent = Container(() => <></>);
 
         let testRenderer = TestRenderer.create(<MockComponent/>);
