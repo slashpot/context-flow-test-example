@@ -13,7 +13,7 @@ function mockContext(count) {
 
         mockState = {
             count
-        }
+        };
 
         return {
             CounterContext: React.createContext({
@@ -25,33 +25,35 @@ function mockContext(count) {
 }
 
 describe("counter tests", () => {
-    beforeEach(() => {
-        jest.resetModules();
-    });
-
     it("should count increase 1 when invoke increment func", async function () {
-        let currentCount = 0
-        mockContext(currentCount);
+        jest.isolateModules(() => {
+            let currentCount = 0;
+            mockContext(currentCount);
 
-        const Container = require("../../component/Counter/CounterContainer").default;
-        const MockComponent = Container(() => <></>);
+            const Container = require("../../component/Counter/CounterContainer").default;
+            const MockComponent = Container(() => <></>);
 
-        let testRenderer = TestRenderer.create(<MockComponent/>);
-        testRenderer.toTree().rendered.props.increment();
+            let testRenderer = TestRenderer.create(<MockComponent/>);
+            testRenderer.toTree().rendered.props.increment();
 
-        expect(mockState.count).toBe(1);
+            expect(mockState.count).toBe(1);
+        })
     });
 
     it("should count decrease 1 when invoke decrement func", async function () {
-        let currentCount = 1
-        mockContext(currentCount);
+        jest.isolateModules(() => {
+            let currentCount = 2;
+            mockContext(currentCount);
 
-        const Container = require("../../component/Counter/CounterContainer").default;
-        const MockComponent = Container(() => <></>);
+            const Container = require("../../component/Counter/CounterContainer").default;
+            const MockComponent = Container(() => <></>);
 
-        let testRenderer = TestRenderer.create(<MockComponent/>);
-        testRenderer.toTree().rendered.props.decrement();
+            let testRenderer = TestRenderer.create(<MockComponent/>);
+            testRenderer.toTree().rendered.props.decrement();
 
-        expect(mockState.count).toBe(0);
+            expect(mockState.count).toBe(1);
+        })
     });
+
+
 });
