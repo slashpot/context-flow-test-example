@@ -25,6 +25,10 @@ function mockContext(count) {
 }
 
 describe("counter tests", () => {
+    beforeEach(() => {
+        jest.resetModules();
+    });
+
     it("should count increase 1 when invoke increment func", async function () {
         let currentCount = 0
         mockContext(currentCount);
